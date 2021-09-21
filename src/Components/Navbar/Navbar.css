@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(57, 57, 71);
+    color: darkgrey;
+    padding: 20px;
+    }
+
+    .itemNav a {
+        color: wheat;
+        text-decoration: none;
+    }
+
+    .itemNav a.active {
+        color: goldenrod;
+    }
+
+    .itemNav :hover {
+        color: snow;
+    }

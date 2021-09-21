@@ -1,0 +1,8 @@
+.content {
+    grid-area: c;
+    background-color: rgb(12, 102, 109);
+    }
+
+.content img {
+    min-width: 1000px;
+}

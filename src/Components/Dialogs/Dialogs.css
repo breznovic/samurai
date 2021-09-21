@@ -1,0 +1,26 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    text-decoration: none;
+}
+
+.dialogItem {
+padding: 10px;
+}
+
+.dialog :hover {
+color: tomato;
+text-decoration: none;
+}
+
+.dialog {
+    text-decoration: none;
+}
+
+.messages {
+padding: 3px;
+}
+
+.message {
+
+}
