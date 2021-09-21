@@ -10,6 +10,13 @@ grid-template-areas:
   
 }
 
+.appWrapperContent {
+ 
+    grid-area: c;
+    background-color: rgb(12, 102, 109);
+    
+}
+
 
 
 
