@@ -1,5 +1,5 @@
-
-import './Dialogs.css'
+import React from 'react'
+import './../Dialogs.css'
 
 const Message = (props) => {
     return (

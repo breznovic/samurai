@@ -13,17 +13,17 @@ import { BrowserRouter, Route } from 'react-router-dom';
 const App = () => {
   return (
     <BrowserRouter>
-    <div className='app-wrapper'>
-      <Header />
-      <Navbar />
-      <div className='appWrapperContent'>
-        <Route path='/dialogs' component={Dialogs} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/news' component={News} />
-        <Route path='/music' component={Music} />
-        <Route path='/setings' component={Settings} />
+      <div className='app-wrapper'>
+        <Header />
+        <Navbar />
+        <div className='appWrapperContent'>
+          <Route path='/dialogs' render={ () => <Dialogs />} />
+          <Route path='/profile' render={ () => <Profile />} />
+          <Route path='/news' render={ () => <News />} />
+          <Route path='/music' render={ () => <Music />} />
+          <Route path='/setings' render={ () => <Settings />} />
+        </div>
       </div>
-    </div>
     </BrowserRouter>
   );
 }
