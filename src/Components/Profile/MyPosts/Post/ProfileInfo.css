@@ -7,3 +7,7 @@
     min-width: 800px;
     object-fit: contain;
 }
+
+.descriptionBlock {
+    padding: 10px;
+}

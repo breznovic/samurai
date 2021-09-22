@@ -1,33 +1,28 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import './Dialogs.css'
+import DialogItem from './DialogItem'
+import Message from './Message.js'
 
 const Dialogs = (props) => {
     return (
         <div className='dialogs'>
-            <div className='dialogItem'>
-                <div className='dialog'>
-                    <NavLink to='/dialogs/1'>Merlin</NavLink>
-                    </div>
-                <div className='dialog'>
-                <NavLink to='/dialogs/2'>Gremlin</NavLink>
-                    </div>
-                <div className='dialog'>
-                <NavLink to='/dialogs/3'>Goblin</NavLink>
-                    </div>
-                <div className='dialog'>
-                <NavLink to='/dialogs/4'>Goblet</NavLink>
-                    </div>
-                <div className='dialog'>
-                <NavLink to='/dialogs/5'>Magician</NavLink>
-                    </div>
+            <div>
+                <div className='dialogItem'>
+                    <DialogItem name='Merlin' id='1' />
+                    <DialogItem name='Gremlin' id='2' />
+                    <DialogItem name='Goblin' id='3' />
+                    <DialogItem name='Goblet' id='4' />
+                    <DialogItem name='Gobelen' id='5' />
                 </div>
-                <div className='messages'>
-                <div className='messages'>Hei ho</div>
-                    <div className='messages'>Litle know</div>
-                    <div className='messages'>Middle Big</div>
-                </div>
+            </div>
+            <div>
+            <Message message='Hei ho'/>
+            <Message message='Little Know'/>
+            <Message message='Middle Big'/>
+            <Message message='Here was a big trouble'/>
+            </div>
         </div>
+
     )
 }
 

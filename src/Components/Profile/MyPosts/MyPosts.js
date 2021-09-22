@@ -6,10 +6,15 @@ const MyPosts = () => {
   return (
 
 
-    <div>My posts
+    <div className='myPostsBlock'>
+      <h2>My posts</h2>
       <div>
+        <div>
         <textarea></textarea>
-        <button>Add post</button>
+        </div>
+        <div>
+          <button>Add post</button>
+          </div>
       </div>
       <Post likes='10' message='Hi there!' />
       <Post likes='9' message='I am learning React' />
