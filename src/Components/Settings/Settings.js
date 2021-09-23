@@ -1,12 +1,15 @@
 import React from 'react'
 import './Settings.css'
 
-const Settings = () => {
-    return (
+ const Settings = () => {
+     return (
+       
+             <div>Settings</div>
         
-            <div>Settings</div>
-        
-    )
-}
+     )
+ }
 
-export default Settings
+ export default Settings
+
+
+
