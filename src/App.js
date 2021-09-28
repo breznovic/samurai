@@ -10,34 +10,39 @@ import Music from './Components/Music/Music';
 import { BrowserRouter, Route } from 'react-router-dom';
 import store from './Redux/store';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
+import Users from './Components/Users/Users';
+import UsersContainer from './Components/Users/UsersContainer';
 
 
 const App = (props) => {
 
   return (
-    
-      <div className='app-wrapper'>
-        <Header />
-        <Navbar />
-        <div className='appWrapperContent'>
-          
-          <Route path='/dialogs' 
-          render={ () => <DialogsContainer store={props.store} />} />
-          
-          <Route path='/profile' 
-          render={ () => <Profile store={props.store} /> } />
-          
-          <Route path='/news' 
-          render={ () => <News />} />
-          
-          <Route path='/music' 
-          render={ () => <Music />} />
-          
-          <Route path='/setings' 
-          render={ () => <Settings />} />
-        </div>
+
+    <div className='app-wrapper'>
+      <Header />
+      <Navbar />
+      <div className='appWrapperContent'>
+
+        <Route path='/dialogs'
+          render={() => <DialogsContainer store={props.store} />} />
+
+        <Route path='/profile'
+          render={() => <Profile store={props.store} />} />
+
+        <Route path='/users'
+          render={() => <UsersContainer store={props.store} />} />
+
+        <Route path='/news'
+          render={() => <News />} />
+
+        <Route path='/music'
+          render={() => <Music />} />
+
+        <Route path='/setings'
+          render={() => <Settings />} />
       </div>
-    
+    </div>
+
   )
 }
 
