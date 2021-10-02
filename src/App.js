@@ -2,16 +2,13 @@ import React from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
 import Navbar from './Components/Navbar/Navbar';
-import Profile from './Components/Profile/Profile';
-import Dialogs from './Components/Dialogs/Dialogs';
 import Settings from './Components/Settings/Settings';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import { BrowserRouter, Route } from 'react-router-dom';
-import store from './Redux/store';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
-import Users from './Components/Users/Users';
 import UsersContainer from './Components/Users/UsersContainer';
+import ProfileContainer from './Components/Profile/ProfileContainer';
 
 
 const App = (props) => {
@@ -26,8 +23,8 @@ const App = (props) => {
         <Route path='/dialogs'
           render={() => <DialogsContainer store={props.store} />} />
 
-        <Route path='/profile'
-          render={() => <Profile store={props.store} />} />
+        <Route path='/profile/:userId?'
+          render={() => <ProfileContainer store={props.store} />} />
 
         <Route path='/users'
           render={() => <UsersContainer store={props.store} />} />
