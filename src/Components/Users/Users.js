@@ -3,6 +3,7 @@ import './Users.css'
 import './../../Assets/Images/Troll.png'
 import { NavLink } from "react-router-dom"
 import * as axios from "axios"
+import { usersAPI } from "../../API/api"
 
 let Users = (props) => {
 
@@ -59,12 +60,7 @@ let Users = (props) => {
 
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.toggleFollowingProgress(true, u.id)
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY" : "95e9da52-3032-4fe8-a832-78a1bde22151"
-                                        }
-                                    })
+                                    usersAPI.follow(u.id)
                                         .then(response => {
                                             if (response.data.resultCode == 0) {
                                                 props.follow(u.id)
