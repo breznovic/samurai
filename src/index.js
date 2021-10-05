@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './Redux/reduxStore';
-import { addPost, updateNewPostText } from './Redux/store';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from "react-redux"
 
 
 
