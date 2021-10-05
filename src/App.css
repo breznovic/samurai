@@ -7,34 +7,28 @@ grid-template-areas:
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   
-  
 }
 
-.header {
-grid-area: h;
-background-color: cornflowerblue;
+.app-wrapper a:visited {
+  color:green;
 }
 
-.header img {
-  width: 50px;
+.app-wrapper a:hover {
+  color:goldenrod;
 }
 
-.nav {
-  grid-area: n;
-  background-color: cyan;
-
-}
-
-.content {
+.app-wrapper-content {
   grid-area: c;
-  background-color: rgb(49, 62, 90);
-
+    background-color: rgb(49, 62, 90);
+    color: goldenrod;
 }
 
-.content img {
+.app-wrapper-content img {
   width: 1600px;
   height: 200px;
 }
+
+
 
 
 

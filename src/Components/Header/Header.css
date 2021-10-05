@@ -1,17 +1,20 @@
 .header {
-    grid-area: h;
-    background-color: rgb(12, 71, 82);
-    }
+  grid-area: h;
+  background-color: cornflowerblue;
+ 
+  }
+  
+  .header img {
+    width: 50px;
+    margin: 10px;
     
-    .header img {
-      width: 20px;
-    }
+  }
 
-    .loginBlock {
+    /* .loginBlock {
       float: right;
       color: palevioletred;
     }
 
     .loginBlock a:visited {
       color: yellowgreen;
-    }
+    } */

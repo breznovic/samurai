@@ -1,11 +1,9 @@
-.itemPost {
-  color: rgb(17, 219, 105);
+.item {
+  color: yellowgreen;
 }
 
-.itemPost img {
-  
-  object-fit: contain;
-  height: 50px;
+.item img {
   width: 50px;
+  height: 40px;
   border-radius: 50px;
 }
