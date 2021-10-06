@@ -6,12 +6,13 @@ grid-template-areas:
 "n c";
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
+  color:green
   
 }
 
-.app-wrapper a:visited {
+ .app-wrapper a:visited {
   color:green;
-}
+} 
 
 .app-wrapper a:hover {
   color:goldenrod;

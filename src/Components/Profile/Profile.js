@@ -1,16 +1,15 @@
 import React from "react"
-import reactCover from './../../Assets/Images/reactCover.jpg'
 import MyPosts from "./MyPosts/MyPosts"
+import ProfileInfo from "./MyPosts/Post/ProfileInfo"
+import './Profile.css'
 
 const Profile = () => {
     return (
-       
         <div>
-        <div><img src={reactCover} /></div>
-        <div>Avatar + Content</div>
-       <MyPosts />
-      </div>
-        
+            <ProfileInfo />
+            <MyPosts />
+        </div>
+
     )
 }
 
