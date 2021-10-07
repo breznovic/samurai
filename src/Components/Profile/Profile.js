@@ -3,13 +3,17 @@ import MyPosts from "./MyPosts/MyPosts"
 import ProfileInfo from "./MyPosts/Post/ProfileInfo"
 import './Profile.css'
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts />
+            <div>
+                <MyPosts posts={props.profilePage.posts} 
+                addPost={props.addPost}
+                newPostText={props.profilePage.newPostText}
+                updateNewPostText={props.updateNewPostText} />
+            </div>
         </div>
-
     )
 }
 

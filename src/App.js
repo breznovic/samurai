@@ -7,7 +7,8 @@ import Navbar from './Components/Navbar/Navbar'
 import Profile from './Components/Profile/Profile'
 
 
-const App = () => {
+
+const App = (props) => {
 
   return (
     <BrowserRouter>
@@ -15,8 +16,10 @@ const App = () => {
       <Header />
       <Navbar />
       <div className='app-wrapper-content'>
-        <Route path='/dialogs' component={Dialogs}/>
-        <Route path='/profile' component={Profile}/>
+        <Route path='/dialogs' render={ () => <Dialogs state={props.state.dialogsPage} />} />
+        <Route path='/profile' render={ () => <Profile profilePage={props.state.profilePage}
+        addPost={props.addPost}
+        updateNewPostText={props.updateNewPostText} />} />
       </div>
     </div>
     </BrowserRouter>

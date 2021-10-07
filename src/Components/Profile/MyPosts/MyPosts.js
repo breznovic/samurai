@@ -2,25 +2,30 @@ import React from "react"
 import './MyPosts.css'
 import Post from "./Post/Post"
 
-const MyPosts = () => {
-    
-    let posts = [
-        { id: 1, message: 'Welcome to TrollNetwork!', like: 10 },
-        { id: 2, message: 'I create it', like: 5 },
-        { id: 3, message: 'Are you glad?', like: 15 }
-    ]
+const MyPosts = (props) => {
 
-    let postsElements = posts
-    .map (posts => <Post message={posts.message} id={posts.id} like={posts.like} />)
-    
+    let postsElements = props.posts.map(posts => <Post message={posts.message} id={posts.id} like={posts.like} />)
+
+    let newPostElement = React.createRef()
+
+    let addPost = () => {
+        props.addPost()
+    }
+
+    let onPostChange = () => {
+        let text = newPostElement.current.value
+        props.updateNewPostText(text)
+    }
+
     return (
 
         <div className='block'>My posts
             <div>
-                <div><textarea></textarea></div>
-                <div><button>Send post</button></div>
+                <div><textarea onChange={onPostChange} 
+                ref={newPostElement} value={props.newPostText} /></div>
+                <div><button onClick={addPost}>Send post</button></div>
             </div>
-           {postsElements}
+            {postsElements}
         </div>
     )
 }
