@@ -1,5 +1,5 @@
 import React from "react"
-import { addPostAC, updateNewPostTextAC } from "../../../Redux/state"
+import { addPostAC, updateNewPostTextAC } from "../../../Redux/profileReducer"
 import './MyPosts.css'
 import Post from "./Post/Post"
 
