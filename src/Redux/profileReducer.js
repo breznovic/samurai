@@ -1,7 +1,17 @@
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 
-const profileReducer = (state, action) => {
+let initialState = {
+    posts: [
+        { id: 1, message: 'Welcome to TrollNetwork!', like: 10 },
+        { id: 2, message: 'I create it', like: 5 },
+        { id: 3, message: 'Are you glad?', like: 15 }
+    ],
+
+    newPostText: ''
+}
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
