@@ -1,3 +1,4 @@
+import React from "react"
 import { connect } from "react-redux"
 import { sendMessageAC, updateNewMessageBodyAC } from "../../Redux/dialogsReducer"
 import Dialogs from "./Dialogs"
@@ -11,10 +12,10 @@ dialogsPage:state.dialogsPage
 
 let mapDispatchToProps = (dispatch) => {
 return {
-updateNewMessageBody: () => {
+sendMessage: () => {
     dispatch(sendMessageAC())
 },
-sendMessage: (body) => {
+updateNewMessageBody: (body) => {
     dispatch(updateNewMessageBodyAC(body))
 }
 }
