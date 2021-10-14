@@ -1,8 +1,9 @@
-/* .img {
-    max-width: 50px;
-    object-fit: contain;
+.img {
+    max-width: 120px;
+    max-height: 100px;
+   
 }
 
 .selectedPage {
     font-weight: bold;
-} */
+}  
