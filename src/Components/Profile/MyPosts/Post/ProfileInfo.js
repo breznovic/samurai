@@ -11,7 +11,7 @@ if (!props.profile) {
     return (
     <div>
 <div><img src={reactCover}/></div>
-<div className='descriptionBlock img3'>
+<div className='descriptionBlock'>
   <img src={props.profile.photos.large} />
     Avatar + Content
   </div>
