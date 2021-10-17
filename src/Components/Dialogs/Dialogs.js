@@ -1,8 +1,8 @@
-import React from "react"
-import { sendMessageAC, updateNewMessageBodyAC } from "../../Redux/dialogsReducer"
-import DialogItem from "./DialogItem/DialogsItem"
+import React from 'react'
+import { Redirect } from 'react-router'
+import DialogItem from './DialogItem/DialogsItem'
 import './Dialogs.css'
-import Message from "./Message/Message"
+import Message from './Message/Message'
 
 const Dialogs = (props) => {
 
@@ -24,6 +24,8 @@ let onNewMessageChange = (e) => {
 let body = e.target.value
 props.updateNewMessageBody(body)
 } 
+
+if (!props.isAuth) return <Redirect to={'/login'} />
 
     return (
         <div className='dialogs'>

@@ -2,6 +2,7 @@ import React from 'react'
 import './ProfileInfo.css'
 import reactCover from './../../../../Assets/Images/reactCover.jpg'
 import Preloader from '../../../Common/Preloader/Preloader'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
 if (!props.profile) {
@@ -10,10 +11,10 @@ if (!props.profile) {
 
     return (
     <div>
-<div><img src={reactCover}/></div>
+{/* <div><img src={reactCover}/></div> */}
 <div className='descriptionBlock'>
   <img src={props.profile.photos.large} />
-    Avatar + Content
+    <ProfileStatus status={'Hello there!'}/>
   </div>
     </div>
     )
