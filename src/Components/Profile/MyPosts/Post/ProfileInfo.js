@@ -14,7 +14,7 @@ if (!props.profile) {
 {/* <div><img src={reactCover}/></div> */}
 <div className='descriptionBlock'>
   <img src={props.profile.photos.large} />
-    <ProfileStatus status={'Hello there!'}/>
+    <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
   </div>
     </div>
     )
