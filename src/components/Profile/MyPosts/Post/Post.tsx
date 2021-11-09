@@ -4,6 +4,7 @@ import monkey from '../../../../Assets/Images/monkey.jpg'
 
 type PostPropsType = {
     posted: string
+    likes: number
 }
 
 function Post(props: PostPropsType) {
@@ -15,7 +16,7 @@ function Post(props: PostPropsType) {
             </div>
             {props.posted}
             <div>
-            <span>like</span>
+            <span>like </span>{props.likes}
             </div>
         </div>
     )
