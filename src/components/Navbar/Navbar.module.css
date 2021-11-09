@@ -2,3 +2,11 @@
     grid-area: n;
     background-color: aqua;
 }
+
+.item {
+    color: darkolivegreen;
+}
+
+.item.active {
+    color: lightyellow;
+}

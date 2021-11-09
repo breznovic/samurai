@@ -9,10 +9,10 @@ function Profile() {
             <div>
                 <img src={lake}/>
             </div>
-            <div>
+            <div className={classes.item}>
                 Avatar + Description
             </div>
-            <div>
+            <div className={classes.item}>
                 My posts
                 <div>
                     New post

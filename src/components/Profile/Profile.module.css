@@ -7,3 +7,11 @@
     width: 1400px;
     height: 775px;
 }
+
+.item {
+    color: darkcyan;
+}
+
+.item.active {
+    color: lightyellow;
+}
