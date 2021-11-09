@@ -1,0 +1,13 @@
+.item {
+    color: darkcyan;
+}
+
+.item img {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 80%;
+}
+
+.item.active {
+    color: lightyellow;
+}
