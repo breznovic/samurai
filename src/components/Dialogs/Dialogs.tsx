@@ -2,42 +2,51 @@ import React from 'react'
 import classes from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 
+type DialogPropsType = {
+    id: number
+    name: string
+}
+
+type MessagePropsType = {
+    message: string
+}
+
+const DialogItem = (props: DialogPropsType) => {
+
+    let path = '/dialogs/' + props.id
+
+    return (
+        <div className={classes.item}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+const Message = (props: MessagePropsType) => {
+
+    return (
+        <div className={classes.message}>
+            {props.message}
+        </div>
+    )
+}
+
 function Dialogs() {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialog}>
-                <div className={classes.item}>
-                    <NavLink to='/dialogs/1'>Homer</NavLink>
-                </div>
-                <div className={classes.item}>
-                    <NavLink to='/dialogs/2'>John</NavLink>
-                </div>
-                <div className={classes.item}>
-                    <NavLink to='/dialogs/3'>Mike</NavLink>
-                </div>
-                <div className={classes.item}>
-                    <NavLink to='/dialogs/4'>Steven</NavLink>
-                </div>
-                <div className={classes.item}>
-                    <NavLink to='/dialogs/5'>Joe</NavLink>
-                </div>
+                <DialogItem name={'Homer'} id={1}/>
+                <DialogItem name={'Cristian'} id={2}/>
+                <DialogItem name={'Joe'} id={3}/>
+                <DialogItem name={'John'} id={4}/>
+                <DialogItem name={'Michael'} id={5}/>
             </div>
             <div className={classes.messages}>
-                <div className={classes.message}>
-                    Hop!
-                </div>
-                <div className={classes.message}>
-                    Hey!
-                </div>
-                <div className={classes.message}>
-                    La!
-                </div>
-                <div className={classes.message}>
-                    La!
-                </div>
-                <div className={classes.message}>
-                    Ley!
-                </div>
+                <Message message='Hop'/>
+                <Message message='Hey'/>
+                <Message message='La'/>
+                <Message message='La'/>
+                <Message message='Ley'/>
             </div>
         </div>
     )

@@ -11,15 +11,17 @@ function MyPosts(props: PostPropsType) {
     return (
 
         <div className={classes.item}>
-            My posts
+            <h3>My posts</h3>
             <div>
-                <textarea/>
+                <div><textarea/></div>
                 <div>
                     <button>Add post</button>
                 </div>
-              <Post posted={'This is TypeScript'} likes={10} />
-              <Post posted={'TypeScript'} likes={5}/>
-              <Post posted={'I write TypeScript!'} likes={7}/>
+                <div className={classes.post}>
+                <Post posted={'This is TypeScript'} likes={10}/>
+                <Post posted={'TypeScript'} likes={5}/>
+                <Post posted={'I write TypeScript!'} likes={7}/>
+                </div>
             </div>
         </div>
     )
