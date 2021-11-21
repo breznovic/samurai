@@ -7,7 +7,7 @@ function Profile() {
     return (
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts posted={''} likes={0}/>
+            <MyPosts posted={''} likes={0} id={0}/>
         </div>
     )
 }

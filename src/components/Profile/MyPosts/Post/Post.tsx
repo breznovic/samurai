@@ -5,6 +5,7 @@ import monkey from '../../../../Assets/Images/monkey.jpg'
 type PostPropsType = {
     posted: string
     likes: number
+    id: number
 }
 
 function Post(props: PostPropsType) {
