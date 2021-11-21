@@ -1,12 +1,7 @@
 import React from 'react'
 import classes from './Post.module.css'
 import monkey from '../../../../Assets/Images/monkey.jpg'
-
-type PostPropsType = {
-    posted: string
-    likes: number
-    id: number
-}
+import {PostPropsType} from "../../../../redux/state";
 
 function Post(props: PostPropsType) {
     return (

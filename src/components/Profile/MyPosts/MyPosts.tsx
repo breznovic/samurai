@@ -1,22 +1,11 @@
 import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post"
+import {ProfilePageType} from "../../../redux/state";
 
-type PostPropsType = {
-    id: number
-    posted: string
-    likes: number
-}
+function MyPosts (props: ProfilePageType) {
 
-function MyPosts(props: PostPropsType) {
-
-    let posts: Array<PostPropsType> = [
-        {id: 1, posted: 'This is TypeScript', likes: 10},
-        {id: 2, posted: 'TypeScript', likes: 5},
-        {id: 3, posted: 'I write TypeScript!', likes: 7},
-    ]
-
-    let postElements = posts.map(p => <Post posted={p.posted} likes={p.likes} id={p.id}/>)
+    let postElements = props.posts.map(p => <Post posted={p.posted} likes={p.likes} id={p.id}/>)
 
     return (
 

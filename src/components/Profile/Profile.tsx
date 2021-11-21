@@ -2,12 +2,13 @@ import React from 'react'
 import classes from '../Profile/Profile.module.css'
 import MyPosts from '../Profile/MyPosts/MyPosts'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../../redux/state";
 
-function Profile() {
+function Profile(props: ProfilePageType) {
     return (
         <div className={classes.content}>
             <ProfileInfo/>
-            <MyPosts posted={''} likes={0} id={0}/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 }
