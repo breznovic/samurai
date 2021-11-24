@@ -7,10 +7,11 @@ function MyPosts (props: ProfilePageType) {
 
     let postElements = props.posts.map(p => <Post posted={p.posted} likes={p.likes} id={p.id}/>)
 
-    let newPostElement: React.RefObject<any> = React.createRef()
+    let newPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     let addPost = () => {
-    let text = newPostElement.current.value
+    let text = newPostElement.current?.value
+        props.addPost(text)
     }
 
     return (

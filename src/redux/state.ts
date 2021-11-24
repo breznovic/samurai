@@ -14,18 +14,18 @@ export type PostPropsType = {
     id: number
 }
 
-export type ProfilePageType ={
+export type ProfilePageType = {
     posts: Array<PostPropsType>
 }
 
-export type DialogPageType ={
+export type DialogPageType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
 }
 
 type SidebarType = {}
 
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebar: SidebarType
@@ -57,6 +57,15 @@ export let state: RootStateType = {
         ]
     },
     sidebar: {}
+}
+
+export let addPost = (postMessage: string) => {
+    let newPost = {
+        id: 4,
+        posted: postMessage,
+        likes: 0
+    }
+    state.profilePage.posts.push(newPost)
 }
 
 export default state

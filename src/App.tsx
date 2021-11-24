@@ -9,13 +9,15 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import state from "./redux/state";
+import {RootStateType} from "./redux/state";
 
-function App() {
 
-    let post = state.profilePage
-    let dialog = state.dialogsPage.dialogs
-    let message = state.dialogsPage.messages
+
+function App(props:{state: RootStateType, addPost:(arg:string)=>void}) {
+
+    let post = props.state.profilePage
+    let dialog = props.state.dialogsPage.dialogs
+    let message = props.state.dialogsPage.messages
 
     return (
 
@@ -24,8 +26,8 @@ function App() {
                 <Navbar/>
                 <div className={classes.content}>
                 <Routes>
-                        <Route path='/dialogs' element={<Dialogs dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages}/>}/>
-                        <Route path='/profile' element={<Profile posts={state.profilePage.posts} />}/>
+                        <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
+                        <Route path='/profile' element={<Profile posts={post} addPost={props.addPost} />}/>
                         <Route path='/users' element={<Users/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
