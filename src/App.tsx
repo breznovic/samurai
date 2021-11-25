@@ -9,32 +9,35 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import { RootStateType} from "./redux/state";
 
+type PropsType = {
+    state: RootStateType
+    addPost: (text: string) => void
+}
 
+function App(props: PropsType) {
 
-function App(props:{state: RootStateType, addPost:(arg:string)=>void}) {
-
-    let post = props.state.profilePage
+    let post = props.state.profilePage.posts
     let dialog = props.state.dialogsPage.dialogs
     let message = props.state.dialogsPage.messages
 
     return (
 
-            <div className={classes.appWrapper}>
-                <Header/>
-                <Navbar/>
-                <div className={classes.content}>
+        <div className={classes.appWrapper}>
+            <Header/>
+            <Navbar/>
+            <div className={classes.content}>
                 <Routes>
-                        <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
-                        <Route path='/profile' element={<Profile posts={post} addPost={props.addPost} />}/>
-                        <Route path='/users' element={<Users/>}/>
-                        <Route path='/news' element={<News/>}/>
-                        <Route path='/music' element={<Music/>}/>
-                        <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
+                    <Route path='/profile' element={<Profile posts={post} addPost={props.addPost}/>}/>
+                    <Route path='/users' element={<Users/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/music' element={<Music/>}/>
+                    <Route path='/settings' element={<Settings/>}/>
                 </Routes>
-                </div>
             </div>
+        </div>
     )
 }
 

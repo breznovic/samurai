@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 export type MessagePropsType = {
     id: number
     message: string
@@ -66,6 +68,7 @@ export let addPost = (postMessage: string) => {
         likes: 0
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state)
 }
 
 export default state

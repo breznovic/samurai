@@ -2,9 +2,14 @@ import React from 'react'
 import classes from '../Profile/Profile.module.css'
 import MyPosts from '../Profile/MyPosts/MyPosts'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType} from "../../redux/state";
+import {PostPropsType, ProfilePageType} from "../../redux/state";
 
-function Profile(props: ProfilePageType) {
+type PropsType = {
+    posts: Array<PostPropsType>
+    addPost: (text:string) => void
+}
+
+function Profile(props: PropsType) {
     return (
         <div className={classes.content}>
             <ProfileInfo/>
