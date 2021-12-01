@@ -1,11 +1,13 @@
 import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post"
-import {PostPropsType, ProfilePageType} from "../../../redux/state";
+import {PostPropsType} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostPropsType>
     addPost: (text:string) => void
+    newPost: string
+    updateNewPostText: (text: string) => void
 }
 
 function MyPosts (props: PropsType) {
@@ -17,9 +19,11 @@ function MyPosts (props: PropsType) {
     let addPost = () => {
     let text = newPostElement.current ? newPostElement.current?.value : ''
         props.addPost(text)
-        if (newPostElement.current) {
-            newPostElement.current.value = ''
-        }
+    }
+
+    let onPostChange = () => {
+    let text = newPostElement.current?.value
+        if (text) props.updateNewPostText(text)
     }
 
     return (
@@ -28,7 +32,7 @@ function MyPosts (props: PropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement} />
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.newPost} />
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>

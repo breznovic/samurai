@@ -9,7 +9,7 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { RootStateType} from "./redux/state";
+import {RootStateType, updateNewPostText} from "./redux/state";
 
 type PropsType = {
     state: RootStateType
@@ -19,6 +19,7 @@ type PropsType = {
 function App(props: PropsType) {
 
     let post = props.state.profilePage.posts
+    let newPost = props.state.profilePage.newPostText
     let dialog = props.state.dialogsPage.dialogs
     let message = props.state.dialogsPage.messages
 
@@ -30,7 +31,7 @@ function App(props: PropsType) {
             <div className={classes.content}>
                 <Routes>
                     <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
-                    <Route path='/profile' element={<Profile posts={post} addPost={props.addPost}/>}/>
+                    <Route path='/profile' element={<Profile posts={post} addPost={props.addPost} newPost={newPost} updateNewPostText={updateNewPostText} />}/>
                     <Route path='/users' element={<Users/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
