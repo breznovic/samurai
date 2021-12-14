@@ -32,20 +32,17 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 
-let rerenderEntireTree = (state: any) => {
-    console.log('State is changed')
-}
-
 export type StoreType = {
-    _state: RootStateType
+    state: RootStateType
     updateNewPostText: (newText: string) => void
     addPost: (newPost: string) => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
+    rerenderEntireTree1: () => void
 }
 
 export let store: StoreType = {
-    _state: {
+    state: {
         profilePage: {
             posts: [
                 {id: 1, posted: 'This is TypeScript', likes: 10},
@@ -72,25 +69,30 @@ export let store: StoreType = {
             ]
         },
         sidebar: {},
-        updateNewPostText(newText: string) {
-            this._state.profilePage.newPostText = newText
-            rerenderEntireTree(this._state)
-        },
-        addPost(newPost: string) {
-            let newPost = {
-                    id: 4,
-                    posted: this._state.profilePage.newPostText,
-                    likes: 0
-                },
-                this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            rerenderEntireTree(this._state)
-        },
-        subscribe = (observer) => {
-            rerederEntireTree = observer
     },
-        getState() {
-        return this._state
-        }
-    }
+    getState() {
+        return this.state
+    },
+
+    rerenderEntireTree1 () {
+
+    },
+
+    updateNewPostText(newText: string) {
+        this.state.profilePage.newPostText = newText
+        this.rerenderEntireTree1()
+    },
+    addPost(newPostText: string) {
+        let newPost = {
+                id: 4,
+                posted: this.state.profilePage.newPostText,
+                likes: 0
+            }
+            this.state.profilePage.posts.push(newPost)
+        this.state.profilePage.newPostText = ''
+        this.rerenderEntireTree1()
+    },
+    subscribe (observer){
+        this.rerenderEntireTree1 = observer
+    },
 }

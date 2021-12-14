@@ -9,24 +9,22 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType, store, StoreType, updateNewPostText} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 type PropsType = {
     store: StoreType
     addPost: (text: string) => void
 }
 
-function App: React.FC<PropsType>
-
-(props)
+function App (props: PropsType)
 {
 
     const state = props.store.getState()
 
-    let post = props.state.profilePage.posts
-    let newPost = props.state.profilePage.newPostText
-    let dialog = props.state.dialogsPage.dialogs
-    let message = props.state.dialogsPage.messages
+    let post = state.profilePage.posts
+    let newPost = state.profilePage.newPostText
+    let dialog = state.dialogsPage.dialogs
+    let message = state.dialogsPage.messages
 
     return (
 
