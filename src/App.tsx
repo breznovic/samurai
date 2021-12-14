@@ -9,14 +9,19 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType, updateNewPostText} from "./redux/state";
+import {RootStateType, store, StoreType, updateNewPostText} from "./redux/state";
 
 type PropsType = {
-    state: RootStateType
+    store: StoreType
     addPost: (text: string) => void
 }
 
-function App(props: PropsType) {
+function App: React.FC<PropsType>
+
+(props)
+{
+
+    const state = props.store.getState()
 
     let post = props.state.profilePage.posts
     let newPost = props.state.profilePage.newPostText
@@ -31,7 +36,10 @@ function App(props: PropsType) {
             <div className={classes.content}>
                 <Routes>
                     <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
-                    <Route path='/profile' element={<Profile posts={post} addPost={props.addPost} newPost={newPost} updateNewPostText={updateNewPostText} />}/>
+                    <Route path='/profile' element={<Profile
+                        posts={post} addPost={props.store.addPost.bind(props.store)}
+                        newPost={newPost}
+                        updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
                     <Route path='/users' element={<Users/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
