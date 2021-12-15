@@ -8,7 +8,7 @@ import {store} from "./redux/state";
 let rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.state}
+            <App store={store}
                  addPost={store.addPost.bind(store)}
                  updateNewPostText={store.updateNewPostText.bind(store)}
             />

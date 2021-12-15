@@ -9,11 +9,12 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {StoreType} from "./redux/state";
+import {RootStateType, StoreType} from "./redux/state";
 
 type PropsType = {
     store: StoreType
     addPost: (text: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App (props: PropsType)
