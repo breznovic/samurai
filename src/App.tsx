@@ -9,12 +9,11 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {RootStateType, StoreType} from "./redux/state";
+import {ActionsTypes, StoreType} from "./redux/state";
 
 type PropsType = {
     store: StoreType
-    addPost: (text: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 function App (props: PropsType)
@@ -26,6 +25,7 @@ function App (props: PropsType)
     let newPost = state.profilePage.newPostText
     let dialog = state.dialogsPage.dialogs
     let message = state.dialogsPage.messages
+    let messageBody = state.dialogsPage.newMessageBody
 
     return (
 
@@ -34,11 +34,17 @@ function App (props: PropsType)
             <Navbar/>
             <div className={classes.content}>
                 <Routes>
-                    <Route path='/dialogs' element={<Dialogs dialogs={dialog} messages={message}/>}/>
+                    <Route path='/dialogs' element={<Dialogs
+                        dialogs={dialog}
+                        messages={message}
+                        messageBody={messageBody}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
                     <Route path='/profile' element={<Profile
-                        posts={post} addPost={props.store.addPost.bind(props.store)}
+                        posts={post}
+                        dispatch={props.store.dispatch.bind(props.store)}
                         newPost={newPost}
-                        updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
+                        />}/>
                     <Route path='/users' element={<Users/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

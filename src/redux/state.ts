@@ -1,3 +1,4 @@
+
 export type MessagePropsType = {
     id: number
     message: string
@@ -22,6 +23,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
+    newMessageBody: string
 }
 
 type SidebarType = {}
@@ -34,11 +36,40 @@ export type RootStateType = {
 
 export type StoreType = {
     state: RootStateType
-    updateNewPostText: (newText: string) => void
-    addPost: (newPost: string) => void
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
     rerenderEntireTree1: () => void
+    dispatch: (action: ActionsTypes) => void
+}
+
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
+    | ReturnType<typeof UpdateNewMessageBodyAC> | ReturnType<typeof SendMessageBodyAC>
+
+export const addPostAC = (posted: string) => {
+    return {
+        type: 'ADD_POST',
+        posted
+    } as const
+}
+
+export const UpdateNewPostTextAC = (newText: string) => {
+    return {
+        type: 'UPDATE_NEW_POST_TEXT',
+        newText
+    } as const
+}
+
+export const UpdateNewMessageBodyAC = (message: string) => {
+    return {
+        type: 'UPDATE_NEW_MESSAGE_BODY',
+        message
+    } as const
+}
+
+export const SendMessageBodyAC = () => {
+    return {
+        type: 'SEND_NEW_MESSAGE_BODY'
+    } as const
 }
 
 export let store: StoreType = {
@@ -66,33 +97,41 @@ export let store: StoreType = {
                 {id: 3, message: 'La'},
                 {id: 4, message: 'La'},
                 {id: 5, message: 'Ley'},
-            ]
+            ],
+            newMessageBody: '',
         },
         sidebar: {},
     },
     getState() {
         return this.state
     },
-
-    rerenderEntireTree1 () {
+    rerenderEntireTree1() {
 
     },
-
-    updateNewPostText(newText: string) {
-        this.state.profilePage.newPostText = newText
-        this.rerenderEntireTree1()
+    subscribe(observer) {
+        this.rerenderEntireTree1 = observer
     },
-    addPost(newPostText: string) {
-        let newPost = {
+    dispatch(action: ActionsTypes) {
+        if (action.type === 'ADD_POST') {
+            let newPost = {
                 id: 4,
-                posted: this.state.profilePage.newPostText,
+                posted: action.posted,
                 likes: 0
             }
             this.state.profilePage.posts.push(newPost)
-        this.state.profilePage.newPostText = ''
-        this.rerenderEntireTree1()
-    },
-    subscribe (observer){
-        this.rerenderEntireTree1 = observer
-    },
+            this.state.profilePage.newPostText = ''
+            this.rerenderEntireTree1()
+        } else if (action.type === 'UPDATE_NEW_POST_TEXT') {
+            this.state.profilePage.newPostText = action.newText
+            this.rerenderEntireTree1()
+        } else if (action.type === 'UPDATE_NEW_MESSAGE_BODY') {
+            this.state.dialogsPage.newMessageBody = action.message
+            this.rerenderEntireTree1()
+        } else if (action.type === 'SEND_NEW_MESSAGE_BODY') {
+            let messageBody = this.state.dialogsPage.newMessageBody
+            this.state.dialogsPage.messages.push({id: 6, message: messageBody})
+            this.state.dialogsPage.newMessageBody = ""
+            this.rerenderEntireTree1()
+        }
+    }
 }
