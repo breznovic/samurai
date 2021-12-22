@@ -9,23 +9,23 @@ import Users from "./components/Users/Users";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {ActionsTypes, StoreType} from "./redux/state";
+import {ActionsTypes} from "./redux/store";
+import {StoreReduxType} from "./redux/reduxStore";
 
 type PropsType = {
-    store: StoreType
+    store: StoreReduxType
     dispatch: (action: ActionsTypes) => void
 }
 
-function App (props: PropsType)
-{
+function App(props: PropsType) {
 
     const state = props.store.getState()
 
-    let post = state.profilePage.posts
-    let newPost = state.profilePage.newPostText
-    let dialog = state.dialogsPage.dialogs
-    let message = state.dialogsPage.messages
-    let messageBody = state.dialogsPage.newMessageBody
+    let post = state.profileReducer.posts
+    let newPost = state.profileReducer.newPostText
+    let dialog = state.dialogsReducer.dialogs
+    let message = state.dialogsReducer.messages
+    let messageBody = state.dialogsReducer.newMessageBody
 
     return (
 
@@ -44,7 +44,7 @@ function App (props: PropsType)
                         posts={post}
                         dispatch={props.store.dispatch.bind(props.store)}
                         newPost={newPost}
-                        />}/>
+                    />}/>
                     <Route path='/users' element={<Users/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>

@@ -1,4 +1,4 @@
-import {ActionsTypes, ProfilePageType, RootStateType} from "./state";
+import {ActionsTypes, ProfilePageType, RootStateType} from "./store";
 
 // type PropsType = {
 //     state: RootStateType
@@ -6,7 +6,16 @@ import {ActionsTypes, ProfilePageType, RootStateType} from "./state";
 //     rerenderEntireTree1: () => void
 // }
 
-export const profileReducer = (state: ProfilePageType, action: ActionsTypes) => {
+let initialState = {
+    posts: [
+        {id: 1, posted: 'This is TypeScript', likes: 10},
+        {id: 2, posted: 'TypeScript', likes: 5},
+        {id: 3, posted: 'I write TypeScript!', likes: 7},
+    ],
+    newPostText: '',
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch(action.type) {
         case 'ADD_POST':
             let newPost = {

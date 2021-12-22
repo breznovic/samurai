@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './Post.module.css'
 import monkey from '../../../../Assets/Images/monkey.jpg'
-import {PostPropsType} from "../../../../redux/state";
+import {PostPropsType} from "../../../../redux/store";
 
 function Post(props: PostPropsType) {
     return (
