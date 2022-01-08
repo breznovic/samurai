@@ -7,7 +7,7 @@ import {addPostAC, UpdateNewPostTextAC} from "../../../redux/profileReducer";
 type PropsType = {
     posts: Array<PostPropsType>
     newPost: string
-    dispatch: (action: ActionsTypes) => void
+    // dispatch: (action: ActionsTypes) => void
 }
 
 function MyPosts (props: PropsType) {
@@ -18,12 +18,14 @@ function MyPosts (props: PropsType) {
 
     let addPost = () => {
     let text = newPostElement.current ? newPostElement.current?.value : ''
-        props.dispatch(addPostAC(text))
+        // props.dispatch(addPostAC(text))
     }
 
     let onPostChange = () => {
     let text = newPostElement.current?.value
-        if (text) props.dispatch(UpdateNewPostTextAC(text))
+        if (text) {
+            // props.dispatch(UpdateNewPostTextAC(text))
+        }
     }
 
     return (

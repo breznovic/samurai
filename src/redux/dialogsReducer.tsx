@@ -1,10 +1,10 @@
-import {ActionsTypes, DialogPageType, RootStateType} from "./store";
+import {ActionsTypes, DialogPageType} from "./store";
 
-type PropsType = {
-    state: RootStateType
-    action: ActionsTypes
-    rerenderEntireTree1: () => void
-}
+// type PropsType = {
+//     state: RootStateType
+//     action: ActionsTypes
+//     rerenderEntireTree1: () => void
+// }
 
 let initialState = {
     dialogs: [
@@ -28,13 +28,26 @@ let initialState = {
 export const dialogsReducer = (state: DialogPageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'UPDATE_NEW_MESSAGE_BODY':
-            state.newMessageBody = action.message
+            return {
+                ...state,
+                newMessageBody: action.message
+            }
+            // state.newMessageBody = action.message
             return state
         case "SEND_NEW_MESSAGE_BODY":
-            let messageBody = state.newMessageBody
-            state.messages.push({id: 6, message: messageBody})
-            state.newMessageBody = ''
-            return state
+            const message = {id: 6, message: state.newMessageBody}
+
+            return {
+                ...state,
+                dialogs: [...state.dialogs, {id: 6, name: "Vasya"}],
+                messages: [...state.messages, message],
+                newMessageBody: ''
+            }
+
+        // let messageBody = state.newMessageBody
+        // state.messages.push({id: 6, message: messageBody})
+        // state.newMessageBody = ''
+        // return state
         default:
             return state
     }
