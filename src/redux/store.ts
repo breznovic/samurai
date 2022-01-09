@@ -1,5 +1,6 @@
 import {addPostAC, profileReducer, UpdateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
+import {followAC, unfollowAC} from "./usersReducer";
 
 export type MessagePropsType = {
     id: number
@@ -46,6 +47,7 @@ export type StoreType = {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof UpdateNewMessageBodyAC> | ReturnType<typeof SendMessageBodyAC>
+    | ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> | ReturnType<typeof setUsersAC>
 
 export let store: StoreType = {
     state: {

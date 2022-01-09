@@ -5,48 +5,69 @@ type LocationType = {
     country: string
 }
 
-type UsersType = {
+export type UsersType = {
     id: number
+    photoURL: string
+    followed: boolean
     name: string
     status: string
     location: LocationType
 }
 
-// type PropsType = {
-//     state: RootStateType
-//     action: ActionsTypes
-//     rerenderEntireTree1: () => void
-// }
+export type InitialStateType = {
+    users: Array<UsersType>
+}
 
-let initialState: Array<UsersType> = [
-    {id: 1, name: 'Urban', status: 'I am Pope', location: {city: 'Rome', country: 'Vatican'}},
-    {id: 1, name: 'Charles', status: 'I am Emperor', location: {city: 'Paris', country: 'France'}},
-    {id: 1, name: 'Peter', status: 'I am Emperor too', location: {city: 'Saint-Petersburg', country: 'Russia'}}
-]
+const initialState: InitialStateType = {
+    users: []
+}
 
-export const usersReducer = (state: UsersType = initialState, action: ActionsTypes) => {
+export const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case '':
-
-            return {...state}
-        case '':
-
-            return {...state}
+        case 'FOLLOW':
+            return {
+                ...state,
+            users: state.users.map(u => {
+                if (u.id === action.usersId) {
+                    return {...u, followed: true}
+                }
+                return u
+            })
+            }
+        case 'UNFOLLOW':
+            return {
+                ...state,
+                users: state.users.map(u => {
+                    if (u.id === action.usersId) {
+                        return {...u, followed: false}
+                    }
+                    return u
+                })
+            }
+        case 'SET_USERS':
+            return {...state, users: [...state.users, ...action.users]}
         default:
             return state
     }
 }
 
-export const addPostAC = (posted: string) => {
+export const followAC = (usersId: number) => {
     return {
-        type: '',
-
+        type: 'FOLLOW',
+        usersId
     } as const
 }
 
-export const UpdateNewPostTextAC = (newText: string) => {
+export const unfollowAC = (usersId: number) => {
     return {
-        type: '',
+        type: 'UNFOLLOW',
+        usersId
+    } as const
+}
 
+export const setUsersAC = (users: Array<UsersType>) => {
+    return {
+        type: 'SET_USERS',
+        users
     } as const
 }
