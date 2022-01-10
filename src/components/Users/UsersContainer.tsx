@@ -16,9 +16,11 @@ type MdtpType = {
 
 export type UsersPropsType = MdtpType & MdtpType
 
-const mapStateToProps = (state: RootStateType): MstpType => ({
-
-    })
+const mapStateToProps = (state: RootStateType): MstpType => {
+return {
+    usersPage: state.users
+}
+    }
 
 const mapDispatchToProps = (dispatch: Dispatch): MdtpType => {
     return {

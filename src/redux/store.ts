@@ -1,6 +1,6 @@
 import {addPostAC, profileReducer, UpdateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
-import {followAC, unfollowAC} from "./usersReducer";
+import {followAC, setUsersAC, unfollowAC} from "./usersReducer";
 
 export type MessagePropsType = {
     id: number
