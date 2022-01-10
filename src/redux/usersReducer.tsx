@@ -7,7 +7,10 @@ type LocationType = {
 
 export type UsersType = {
     id: number
-    photoURL: string
+    photos: {
+        small: string
+        large: string
+    }
     followed: boolean
     name: string
     status: string
