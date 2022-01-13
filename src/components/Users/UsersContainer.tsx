@@ -1,6 +1,6 @@
-import {RootStateType} from "../../redux/reduxStore";
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {RootStateType} from "../../redux/reduxStore"
+import {connect} from "react-redux"
+import {Dispatch} from "redux"
 import {
     followAC,
     InitialStateType,
@@ -8,8 +8,8 @@ import {
     setUsersAC,
     unfollowAC,
     UsersType
-} from "../../redux/usersReducer";
-import Users from "./Users";
+} from "../../redux/usersReducer"
+import UsersAPIComponent from "./UsersAPIComponent"
 
 type MstpType = {
     usersPage: InitialStateType
@@ -57,4 +57,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MdtpType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
