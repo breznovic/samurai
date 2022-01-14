@@ -1,12 +1,10 @@
-import {RootStateType} from "../../redux/reduxStore"
+import {AppStateType, RootStateType} from "../../redux/reduxStore"
 import {connect} from "react-redux"
-import {Dispatch} from "redux"
 import {
-    followAC,
-    InitialStateType,
-    setCurrentPageAC, setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC,
+    follow,
+    InitialStateType, toggleIsFetching,
+    setCurrentPage, setTotalUsersCount,
+    setUsers, unfollow,
     UsersType
 } from "../../redux/usersReducer"
 import UsersAPIComponent from "./UsersAPIComponent"
@@ -16,6 +14,7 @@ type MstpType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 type MdtpType = {
@@ -24,37 +23,27 @@ type MdtpType = {
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 export type UsersPropsType = MdtpType & MdtpType
 
-const mapStateToProps = (state: RootStateType): MstpType => {
-return {
-    usersPage: state.users,
-    pageSize: state.users.pageSize,
-    totalUsersCount: state.users.totalUsersCount,
-    currentPage: state.users.currentPage,
-}
-    }
-
-const mapDispatchToProps = (dispatch: Dispatch): MdtpType => {
+const mapStateToProps = (state: AppStateType): MstpType => {
     return {
-        follow: (usersId: number) => {
-            dispatch(followAC(usersId))
-        },
-        unfollow: (usersId: number) => {
-            dispatch(unfollowAC(usersId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        }
+        usersPage: state.users,
+        pageSize: state.users.pageSize,
+        totalUsersCount: state.users.totalUsersCount,
+        currentPage: state.users.currentPage,
+        isFetching: state.users.isFetching,
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer = connect(mapStateToProps,
+    {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching,
+    })(UsersAPIComponent)

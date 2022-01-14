@@ -1,14 +1,13 @@
 import React from 'react'
 import classes from './MyPosts.module.css'
 import Post from "./Post/Post"
-import {ActionsTypes, PostPropsType} from "../../../redux/store";
+import {PostPropsType} from "../../../redux/reduxStore";
 
 type PropsType = {
     posts: Array<PostPropsType>
     newPost: string
     addPost: (posted: string) => void
     newPostText: (newText: string) => void
-    // dispatch: (action: ActionsTypes) => void
 }
 
 function MyPosts (props: PropsType) {

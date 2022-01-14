@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogPageType} from "./store";
+import {ActionsTypes, DialogPageType} from "./reduxStore";
 
 let initialState = {
     dialogs: [

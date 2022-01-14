@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {SendMessageBodyAC, UpdateNewMessageBodyAC} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
-import {DialogPropsType, MessagePropsType} from "../../redux/store";
+import {DialogPropsType, MessagePropsType} from "../../redux/reduxStore";
 
 type MstpType = {
     dialogs: Array<DialogPropsType>

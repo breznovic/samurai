@@ -1,6 +1,5 @@
 import React from 'react'
 import classes from '../Dialogs.module.css'
-import {StoreType} from "../../../redux/store";
 
 type MessagePropsType = {
     id: number

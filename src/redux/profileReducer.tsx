@@ -1,21 +1,18 @@
-import {ActionsTypes, ProfilePageType, RootStateType} from "./store";
+import {ActionsTypes, ProfilePageType, ProfilePropsType} from "./reduxStore";
 
-// type PropsType = {
-//     state: RootStateType
-//     action: ActionsTypes
-//     rerenderEntireTree1: () => void
-// }
-
-let initialState = {
+let initialState:ProfilePageType= {
     posts: [
         {id: 1, posted: 'This is TypeScript', likes: 10},
         {id: 2, posted: 'TypeScript', likes: 5},
         {id: 3, posted: 'I write TypeScript!', likes: 7},
     ],
     newPostText: '',
+    profile: null,
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes):ProfilePageType=> {
     switch(action.type) {
         case 'ADD_POST':
             let newPost = {
@@ -26,10 +23,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             state.posts.push(newPost)
             state.newPostText = ''
             return {...state}
-        case 'UPDATE_NEW_POST_TEXT':
-
+        case 'UPDATE_NEW_POST_TEXT': {
             state.newPostText = action.newText
             return {...state}
+        }
+       case 'SET_USER_PROFILE':
+            return {...state, profile:action.profile}
         default:
             return state
     }
@@ -46,5 +45,12 @@ export const UpdateNewPostTextAC = (newText: string) => {
     return {
         type: 'UPDATE_NEW_POST_TEXT',
         newText
+    } as const
+}
+
+export const setUserProfile = (profile: ProfilePropsType ) => {
+    return {
+        type: 'SET_USER_PROFILE',
+        profile
     } as const
 }
