@@ -2,6 +2,7 @@ import {combineReducers, createStore} from "redux";
 import {addPostAC, profileReducer, setUserProfile, UpdateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {follow, setUsers, unfollow, usersReducer} from "./usersReducer";
+import {authReducer} from "./authReducer";
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof UpdateNewMessageBodyAC> | ReturnType<typeof SendMessageBodyAC>
@@ -143,7 +144,8 @@ export let oldStore: StoreType = {
 export const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
-    users: usersReducer
+    users: usersReducer,
+    auth: authReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>
