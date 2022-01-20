@@ -5,7 +5,7 @@ import {
     InitialStateType, toggleIsFetching,
     setCurrentPage, setTotalUsersCount,
     setUsers, unfollow,
-    UsersType
+    UsersType, toggleFollowingProgress
 } from "../../redux/usersReducer"
 import UsersAPIComponent from "./UsersAPIComponent"
 
@@ -15,6 +15,7 @@ type MstpType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 type MdtpType = {
@@ -24,6 +25,7 @@ type MdtpType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (userId: number, followingInProgress: boolean) => void
 }
 
 export type UsersPropsType = MdtpType & MdtpType
@@ -35,6 +37,7 @@ const mapStateToProps = (state: AppStateType): MstpType => {
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
         isFetching: state.users.isFetching,
+        followingInProgress: state.users.followingInProgress
     }
 }
 
@@ -46,4 +49,5 @@ export const UsersContainer = connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         toggleIsFetching,
+        toggleFollowingProgress
     })(UsersAPIComponent)

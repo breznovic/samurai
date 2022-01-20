@@ -1,5 +1,5 @@
 import React from 'react'
-import {InitialStateType, UsersType} from "../../redux/usersReducer";
+import {InitialStateType, toggleFollowingProgress, UsersType} from "../../redux/usersReducer";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader";
 import {usersAPI} from "../../API/API";
@@ -12,8 +12,10 @@ type PropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (followingInProgress: boolean, userId: number) => void
     currentPage: number
     pageSize: number
+    followingInProgress: Array<number>
 }
 
 class UsersAPIComponent extends React.Component<PropsType, {}> {
@@ -48,6 +50,8 @@ class UsersAPIComponent extends React.Component<PropsType, {}> {
                    toggleIsFetching={this.props.toggleIsFetching}
                    setUsers={this.props.setUsers}
                    setTotalUsersCount={this.props.setTotalUsersCount}
+                   toggleFollowingProgress={this.props.toggleFollowingProgress}
+                   followingInProgress={this.props.followingInProgress}
             />
         </>
     }
