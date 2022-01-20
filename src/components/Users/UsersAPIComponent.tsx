@@ -1,8 +1,8 @@
 import React from 'react'
 import {InitialStateType, UsersType} from "../../redux/usersReducer";
-import axios from "axios";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader";
+import {usersAPI} from "../../API/API";
 
 type PropsType = {
     follow: (usersId: number) => void
@@ -12,25 +12,29 @@ type PropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    currentPage: number
+    pageSize: number
 }
 
 class UsersAPIComponent extends React.Component<PropsType, {}> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`).then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
-        })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
+            })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`).then(response => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items)
-        })
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false)
+                this.props.setUsers(data.items)
+            })
     }
 
     render() {
@@ -40,7 +44,11 @@ class UsersAPIComponent extends React.Component<PropsType, {}> {
             <Users usersPage={this.props.usersPage}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   onPageChanged={this.onPageChanged}/>
+                   onPageChanged={this.onPageChanged}
+                   toggleIsFetching={this.props.toggleIsFetching}
+                   setUsers={this.props.setUsers}
+                   setTotalUsersCount={this.props.setTotalUsersCount}
+            />
         </>
     }
 }
