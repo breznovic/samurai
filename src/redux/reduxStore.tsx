@@ -1,4 +1,5 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunk from "redux-thunk";
 import {addPostAC, profileReducer, setUserProfile, UpdateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {follow, setUsers, unfollow, usersReducer} from "./usersReducer";
@@ -76,70 +77,70 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export let oldStore: StoreType = {
-    state: {
-        profilePage: {
-            posts: [
-                {id: 1, posted: 'This is TypeScript', likes: 10},
-                {id: 2, posted: 'TypeScript', likes: 5},
-                {id: 3, posted: 'I write TypeScript!', likes: 7},
-            ],
-            newPostText: '',
-            profile: {
-                userId: 1,
-                lookingForAJob: false,
-                lookingForAJobDescription: '',
-                fullName: '',
-                contacts: {
-                    github: '',
-                    vk: '',
-                    facebook: '',
-                    instagram: '',
-                    twitter: '',
-                    website: '',
-                    youtube: '',
-                    mainLink: ''
-                },
-                photos: {
-                    small: '',
-                    large: '',
-                }
-            }
-        },
-        dialogsPage: {
-            dialogs: [
-                {id: 1, name: 'Homer'},
-                {id: 2, name: 'Cristian'},
-                {id: 3, name: 'Joe'},
-                {id: 4, name: 'John'},
-                {id: 5, name: 'Michael'},
-            ],
-
-            messages: [
-                {id: 1, message: 'Hop'},
-                {id: 2, message: 'Hey'},
-                {id: 3, message: 'La'},
-                {id: 4, message: 'La'},
-                {id: 5, message: 'Ley'},
-            ],
-            newMessageBody: '',
-        },
-        sidebar: {},
-    },
-    getState() {
-        return this.state
-    },
-    rerenderEntireTree1() {
-    },
-    subscribe(observer) {
-        this.rerenderEntireTree1 = observer
-    },
-    dispatch(action: ActionsTypes) {
-        this.state.profilePage = profileReducer(this.state.profilePage, action)
-        this.state.dialogsPage = dialogsReducer(this.state.dialogsPage, action)
-        this.rerenderEntireTree1()
-    }
-}
+// export let oldStore: StoreType = {
+//     state: {
+//         profilePage: {
+//             posts: [
+//                 {id: 1, posted: 'This is TypeScript', likes: 10},
+//                 {id: 2, posted: 'TypeScript', likes: 5},
+//                 {id: 3, posted: 'I write TypeScript!', likes: 7},
+//             ],
+//             newPostText: '',
+//             profile: {
+//                 userId: 1,
+//                 lookingForAJob: false,
+//                 lookingForAJobDescription: '',
+//                 fullName: '',
+//                 contacts: {
+//                     github: '',
+//                     vk: '',
+//                     facebook: '',
+//                     instagram: '',
+//                     twitter: '',
+//                     website: '',
+//                     youtube: '',
+//                     mainLink: ''
+//                 },
+//                 photos: {
+//                     small: '',
+//                     large: '',
+//                 }
+//             }
+//         },
+//         dialogsPage: {
+//             dialogs: [
+//                 {id: 1, name: 'Homer'},
+//                 {id: 2, name: 'Cristian'},
+//                 {id: 3, name: 'Joe'},
+//                 {id: 4, name: 'John'},
+//                 {id: 5, name: 'Michael'},
+//             ],
+//
+//             messages: [
+//                 {id: 1, message: 'Hop'},
+//                 {id: 2, message: 'Hey'},
+//                 {id: 3, message: 'La'},
+//                 {id: 4, message: 'La'},
+//                 {id: 5, message: 'Ley'},
+//             ],
+//             newMessageBody: '',
+//         },
+//         sidebar: {},
+//     },
+//     getState() {
+//         return this.state
+//     },
+//     rerenderEntireTree1() {
+//     },
+//     subscribe(observer) {
+//         this.rerenderEntireTree1 = observer
+//     },
+//     dispatch(action: ActionsTypes) {
+//         this.state.profilePage = profileReducer(this.state.profilePage, action)
+//         this.state.dialogsPage = dialogsReducer(this.state.dialogsPage, action)
+//         this.rerenderEntireTree1()
+//     }
+// }
 
 export const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
@@ -150,6 +151,6 @@ export const rootReducer = combineReducers({
 
 export type RootStateType = ReturnType<typeof rootReducer>
 
-let store = createStore(rootReducer)
+let store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default store

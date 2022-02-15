@@ -1,4 +1,4 @@
-import {ActionsTypes, ProfilePageType, ProfilePropsType} from "./reduxStore";
+import { ProfilePageType, ProfilePropsType} from "./reduxStore";
 
 let initialState:ProfilePageType= {
     posts: [
@@ -10,9 +10,12 @@ let initialState:ProfilePageType= {
     profile: null,
 }
 
+type ActionType =
+    ReturnType<typeof addPostAC> |
+    ReturnType<typeof UpdateNewPostTextAC> |
+    ReturnType<typeof setUserProfile>
 
-
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes):ProfilePageType=> {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionType):ProfilePageType=> {
     switch(action.type) {
         case 'ADD_POST':
             let newPost = {

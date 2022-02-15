@@ -1,8 +1,6 @@
 import React from 'react'
-import {InitialStateType, toggleFollowingProgress, UsersType} from "../../redux/usersReducer";
-import {Users} from "./Users";
-import Preloader from "../Common/Preloader";
-import {usersAPI} from "../../API/API";
+import {InitialStateType, UsersType} from "../../redux/usersReducer";
+import {UsersPropsType} from "./UsersContainer";
 
 type PropsType = {
     follow: (usersId: number) => void
@@ -12,47 +10,29 @@ type PropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleFollowingProgress: (followingInProgress: boolean, userId: number) => void
+    toggleFollowingProgress: (userId: number, followingInProgress: boolean) => void
     currentPage: number
     pageSize: number
     followingInProgress: Array<number>
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
-class UsersAPIComponent extends React.Component<PropsType, {}> {
-    componentDidMount() {
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
-    }
-
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            })
-    }
+class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     render() {
 
         return <>
-            {this.props.usersPage.isFetching ? <Preloader/> : ''}
-            <Users usersPage={this.props.usersPage}
-                   follow={this.props.follow}
-                   unfollow={this.props.unfollow}
-                   onPageChanged={this.onPageChanged}
-                   toggleIsFetching={this.props.toggleIsFetching}
-                   setUsers={this.props.setUsers}
-                   setTotalUsersCount={this.props.setTotalUsersCount}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
-                   followingInProgress={this.props.followingInProgress}
-            />
+            {/*{this.props.usersPage.isFetching ? <Preloader/> : ''}*/}
+            {/*<Users usersPage={this.props.usersPage}*/}
+            {/*       follow={this.props.follow}*/}
+            {/*       unfollow={this.props.unfollow}*/}
+            {/*       onPageChanged={this.onPageChanged}*/}
+            {/*       toggleIsFetching={this.props.toggleIsFetching}*/}
+            {/*       setUsers={this.props.setUsers}*/}
+            {/*       setTotalUsersCount={this.props.setTotalUsersCount}*/}
+            {/*       toggleFollowingProgress={this.props.toggleFollowingProgress}*/}
+            {/*       followingInProgress={this.props.followingInProgress}*/}
+            {/*/>*/}
         </>
     }
 }
