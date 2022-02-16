@@ -1,4 +1,6 @@
 import { ProfilePageType, ProfilePropsType} from "./reduxStore";
+import {usersAPI} from "../API/API";
+import {Dispatch} from "redux";
 
 let initialState:ProfilePageType= {
     posts: [
@@ -51,9 +53,16 @@ export const UpdateNewPostTextAC = (newText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: ProfilePropsType ) => {
+const setUserProfile = (profile: ProfilePropsType ) => {
     return {
         type: 'SET_USER_PROFILE',
         profile
     } as const
+}
+
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }

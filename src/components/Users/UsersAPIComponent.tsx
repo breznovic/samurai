@@ -22,17 +22,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType> {
     render() {
 
         return <>
-            {/*{this.props.usersPage.isFetching ? <Preloader/> : ''}*/}
-            {/*<Users usersPage={this.props.usersPage}*/}
-            {/*       follow={this.props.follow}*/}
-            {/*       unfollow={this.props.unfollow}*/}
-            {/*       onPageChanged={this.onPageChanged}*/}
-            {/*       toggleIsFetching={this.props.toggleIsFetching}*/}
-            {/*       setUsers={this.props.setUsers}*/}
-            {/*       setTotalUsersCount={this.props.setTotalUsersCount}*/}
-            {/*       toggleFollowingProgress={this.props.toggleFollowingProgress}*/}
-            {/*       followingInProgress={this.props.followingInProgress}*/}
-            {/*/>*/}
         </>
     }
 }

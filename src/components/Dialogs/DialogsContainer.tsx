@@ -9,6 +9,7 @@ type MstpType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
     messageBody: string
+    isAuth: boolean
 }
 
 type MdtpType = {
@@ -26,6 +27,7 @@ const DialogsContainer = (props: PropsType) => {
             messageBody={props.messageBody}
             sendMessage={props.sendMessage}
             updateNewMessageBody={props.updateNewMessageBody}
+            isAuth={props.isAuth}
         />
     )
 }
@@ -34,6 +36,7 @@ const mapStateToProps = (state: RootStateType): MstpType => ({
     dialogs: state.dialogsPage.dialogs,
     messages: state.dialogsPage.messages,
     messageBody: state.dialogsPage.newMessageBody,
+    isAuth: state.auth.isAuth
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): MdtpType => ({
