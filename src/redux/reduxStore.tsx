@@ -59,6 +59,7 @@ export type ProfilePageType = {
     posts: Array<PostPropsType>
     newPostText: string
     profile: ProfilePropsType | null
+    status: string
 }
 
 export type OldRootStateType = {

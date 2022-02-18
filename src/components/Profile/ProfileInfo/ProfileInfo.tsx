@@ -1,11 +1,12 @@
 import React from 'react'
 import classes from './ProfileInfo.module.css'
-import lake from '../../../Assets/Images/lake.jpg'
 import {ProfilePageType} from "../../../redux/reduxStore";
 import Preloader from "../../Common/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 type PropsType = {
     profilePage: ProfilePageType
+    updateStatus: (status: string) => void
 }
 
 function ProfileInfo(props: PropsType) {
@@ -14,12 +15,9 @@ function ProfileInfo(props: PropsType) {
     }
     return (
         <div>
-            <div>
-                <img src={lake}/>
-            </div>
             <div className={classes.item}>
                 <img src={props.profilePage.profile?.photos.large}/>
-                Avatar + Description
+               <ProfileStatus status={props.profilePage.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

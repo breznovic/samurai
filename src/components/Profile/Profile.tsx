@@ -6,12 +6,13 @@ import {ProfilePageType} from "../../redux/reduxStore";
 
 export type PropsType = {
     profilePage: ProfilePageType
+    updateStatus: (status: string) => void
 }
 
 function Profile(props: PropsType) {
     return (
         <div className={classes.content}>
-            <ProfileInfo profilePage={props.profilePage}/>
+            <ProfileInfo profilePage={props.profilePage} updateStatus={props.updateStatus}/>
             <MyPostsContainer />
         </div>
     )
