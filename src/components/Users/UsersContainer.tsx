@@ -1,5 +1,5 @@
 import React from 'react'
-import {AppStateType} from "../../redux/reduxStore"
+import {AppStateType, RootStateType} from "../../redux/reduxStore"
 import {Users} from '../Users/Users'
 import {connect} from "react-redux"
 import {
@@ -10,6 +10,9 @@ import {
     UsersType, toggleFollowingProgress, getUsers, setUsers, setTotalUsersCount, toggleIsFetching,
 } from "../../redux/usersReducer"
 import Preloader from "../Common/Preloader";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import Dialogs from "../Dialogs/Dialogs";
+import {compose} from "redux";
 
 
 export type UsersPropsType = MdtpType & MstpType
@@ -78,9 +81,7 @@ const mapStateToProps = (state: AppStateType): MstpType => {
     }
 }
 
-
-export default connect(mapStateToProps,
-    {
+export default compose<React.ComponentType>(connect<MstpType, MdtpType, {}, RootStateType>(mapStateToProps, {
         follow,
         unfollow,
         setCurrentPage,
@@ -89,4 +90,6 @@ export default connect(mapStateToProps,
         toggleIsFetching,
         setUsers,
         setTotalUsersCount,
-    })(UserContainer)
+    }),
+    withAuthRedirect
+)(UserContainer)
