@@ -1,37 +1,53 @@
 import React from "react";
-import {useFormik, Field, Form, Formik} from "formik";
+import {Field, Form, Formik} from "formik";
 
-export function LoginForm() {
-    const formik = useFormik({
-        initialValues: {
-            login: '',
-            password: ''
-        }
-        })
+export const LoginForm = () => {
 
-    return (
+    const userValodate = (values: any) => {
+        const errors = {}
+        return errors
+    }
+
+    return <div>
+
         <Formik
-            initialValues={initialValues}
-            onSubmit={(values, actions) => {
-                console.log({ values, actions });
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
+            initialValues={{login: '', password: ''}}
+            validate={userValodate}
+            onSubmit={(values, {setSubmitting}) => {
+                setTimeout(() => {
+                }, 400);
             }}
         >
-        <Form>
-            <div>
-                <Field type='text' id='login' name='login' placeholder='Login'/>
-            </div>
-            <div>
-                <Field type='password' id='password' name='password' placeholder='Password'/>
-            </div>
-            <div>
-                <div>
-                    <Field type='checkbox' id='rememberMe' name='rememberMe'/>Remember Me
-                </div>
-                <button type='submit'>Login</button>
-            </div>
-        </Form>
+            {({
+                  values,
+                  handleChange,
+                  handleSubmit,
+              }) => (
+                <Form onSubmit={handleSubmit}>
+                    <div>
+                        <input
+                            id="login"
+                            name="login"
+                            type="login"
+                            onChange={handleChange}
+                            value={values.login}
+                            placeholder='Login'
+                        /></div>
+                    <div>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            onChange={handleChange}
+                            value={values.password}
+                            placeholder='Password'
+                        /></div>
+                    <div>
+                        <Field type='checkbox' id='rememberMe' name='rememberMe'/>Remember Me
+                    </div>
+                    <button type="submit">Submit</button>
+                </Form>
+            )}
         </Formik>
-    )
-}
+    </div>
+};
