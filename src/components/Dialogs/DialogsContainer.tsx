@@ -1,13 +1,11 @@
 import {RootStateType} from "../../redux/reduxStore";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
-import {SendMessageBodyAC, UpdateNewMessageBodyAC} from "../../redux/dialogsReducer";
+import {SendMessageBodyAC} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {DialogPropsType, MessagePropsType} from "../../redux/reduxStore";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import React from "react";
-import {getUserProfile} from "../../redux/profileReducer";
-import {withRouter} from "react-router-dom";
 
 type MstpType = {
     dialogs: Array<DialogPropsType>
@@ -42,8 +40,7 @@ const mapStateToProps = (state: RootStateType): MstpType => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): MdtpType => ({
-    sendMessage: () => dispatch(SendMessageBodyAC()),
-    updateNewMessageBody: (message: string) => dispatch(UpdateNewMessageBodyAC(message)),
+    sendMessage: (newMessageBody) => dispatch(SendMessageBodyAC(newMessageBody)),
 })
 
 export default compose<React.ComponentType>(connect<MstpType, MdtpType, {}, RootStateType>(mapStateToProps, mapDispatchToProps),

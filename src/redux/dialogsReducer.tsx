@@ -15,29 +15,19 @@ let initialState = {
         {id: 3, message: 'La'},
         {id: 4, message: 'La'},
         {id: 5, message: 'Ley'},
-    ],
-    newMessageBody: '',
+    ]
 }
-type ActionTypes =
-    ReturnType<typeof UpdateNewMessageBodyAC> |
-    ReturnType<typeof SendMessageBodyAC>
+type ActionTypes = ReturnType<typeof SendMessageBodyAC>
 
 export const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes) => {
     switch (action.type) {
-        case 'UPDATE_NEW_MESSAGE_BODY':
-            return {
-                ...state,
-                newMessageBody: action.message
-            }
-            // return state
         case "SEND_NEW_MESSAGE_BODY":
-            const message = {id: 6, message: state.newMessageBody}
+            const message = {id: 6, message: action.newMessageBody}
 
             return {
                 ...state,
                 dialogs: [...state.dialogs, {id: 6, name: 'Basil'}],
                 messages: [...state.messages, message],
-                newMessageBody: ''
             }
 
         default:
@@ -45,15 +35,9 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
     }
 }
 
-export const UpdateNewMessageBodyAC = (message: string) => {
+export const SendMessageBodyAC = (newMessageBody) => {
     return {
-        type: 'UPDATE_NEW_MESSAGE_BODY',
-        message
-    } as const
-}
-
-export const SendMessageBodyAC = () => {
-    return {
-        type: 'SEND_NEW_MESSAGE_BODY'
+        type: 'SEND_NEW_MESSAGE_BODY',
+        newMessageBody
     } as const
 }

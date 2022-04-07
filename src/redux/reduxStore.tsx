@@ -4,6 +4,7 @@ import {addPostAC, profileReducer, getUserProfile, UpdateNewPostTextAC} from "./
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {follow, setUsers, unfollow, usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
+import { reducer as formReducer } from 'redux-form';
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
     | ReturnType<typeof UpdateNewMessageBodyAC> | ReturnType<typeof SendMessageBodyAC>
@@ -28,7 +29,6 @@ export type PostPropsType = {
 export type DialogPageType = {
     dialogs: Array<DialogPropsType>
     messages: Array<MessagePropsType>
-    newMessageBody: string
 }
 
 export type AppStateType = ReturnType<typeof rootReducer>
@@ -62,10 +62,15 @@ export type ProfilePageType = {
     status: string
 }
 
+export type FormType = {
+
+}
+
 export type OldRootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebar: SidebarType
+    form: FormType
 }
 
 type SidebarType = {}
@@ -82,7 +87,8 @@ export const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     users: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

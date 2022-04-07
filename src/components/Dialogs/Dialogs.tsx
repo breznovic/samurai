@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogPropsType, MessagePropsType,} from "../../redux/reduxStore";
 import {Redirect} from "react-router-dom";
+import {AddMessageForm, AddMessageFormRedux} from "./AddMessageForm";
 
 type PropsType = {
     dialogs: Array<DialogPropsType>
@@ -19,13 +20,8 @@ function Dialogs(props: PropsType) {
     let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = props.messages.map(m => <Message message={m.message} id={m.id}/>)
     let newMessageBody = props.messageBody
-
-    const onSendMessageClick = () => {
-        props.sendMessage()
-    }
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let messageBody = e.target.value
-        props.updateNewMessageBody(messageBody)
+    let addNewMessage = (values) => {
+        props.sendMessage(values.newMessageBody)
     }
 
     if (!props.isAuth) return <Redirect to={'/login'}/>
@@ -37,15 +33,8 @@ function Dialogs(props: PropsType) {
             </div>
             <div className={classes.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div><textarea value={newMessageBody}
-                                   onChange={onNewMessageChange}
-                                   placeholder='Enter your message'></textarea></div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Send message</button>
-                    </div>
-                </div>
             </div>
+            <AddMessageFormRedux onSubmit={addNewMessage}/>
         </div>
     )
 }
