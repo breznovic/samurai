@@ -15,7 +15,6 @@ let initialState:ProfilePageType= {
 
 type ActionType =
     ReturnType<typeof addPostAC> |
-    ReturnType<typeof UpdateNewPostTextAC> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatusAC>
 
@@ -24,16 +23,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD_POST':
             let newPost = {
                 "id": 4,
-                "posted": action.posted,
+                "posted": action.newPostText,
                 "likes": 0
             }
             state.posts.push(newPost)
             state.newPostText = ''
             return {...state}
-        case 'UPDATE_NEW_POST_TEXT': {
-            state.newPostText = action.newText
-            return {...state}
-        }
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
         }
@@ -45,17 +40,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     }
 }
 
-export const addPostAC = (posted: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD_POST',
-        posted
-    } as const
-}
-
-export const UpdateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE_NEW_POST_TEXT',
-        newText
+        newPostText
     } as const
 }
 

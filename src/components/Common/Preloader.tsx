@@ -1,4 +1,4 @@
-import preloader from "../../Assets/Images/preloader.gif";
+import preloader from "../../assets/Images/preloader.gif";
 import React from "react";
 
 let Preloader = () => {

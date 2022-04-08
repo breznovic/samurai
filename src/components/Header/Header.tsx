@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from '../Header/Header.module.css'
-import samurai from '../../Assets/Images/samurai.jpg'
+import samurai from '../../assets/Images/samurai.jpg'
 import {NavLink} from 'react-router-dom'
 
 type PropsType = {

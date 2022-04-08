@@ -1,7 +1,7 @@
 import {PostPropsType, RootStateType} from "../../../redux/reduxStore";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {addPostAC, UpdateNewPostTextAC} from "../../../redux/profileReducer";
+import {addPostAC} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 
 type MstpType = {
@@ -22,8 +22,7 @@ const mapStateToProps = (state: RootStateType): MstpType => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): MdtpType => ({
-    addPost: (posted: string) => dispatch(addPostAC(posted)),
-    newPostText: (newText: string) => dispatch(UpdateNewPostTextAC(newText)),
+    addPost: (newPostText: string) => dispatch(addPostAC(newPostText)),
 })
 
 const MyPostsContainer = (props: PropsType) => {
