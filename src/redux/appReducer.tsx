@@ -1,23 +1,25 @@
 import {authAPI} from "../API/API";
 import {Dispatch} from "redux";
+import {stopSubmit} from 'redux-form';
 
 type ActionsTypes = ReturnType<typeof setAuthUserData>
 
 export type DataType = {
+    initialized: boolean
     id: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
 
-const initialState: DataType = {id: null, email: null, login: null, isAuth: false}
+const initialState: DataType = {initialized: false, id: null, email: null, login: null, isAuth: false}
 
-export const authReducer = (state: DataType = initialState, action: ActionsTypes): DataType => {
+export const appReducer = (state: DataType = initialState, action: ActionsTypes): DataType => {
     switch (action.type) {
-        case 'SET_USER_DATA':
+        case 'INITIALIZED_SUCCESS':
             return {
                 ...state,
-                ...action.data,
+                initialized: true,
                 isAuth: true
             }
         default:
@@ -25,7 +27,7 @@ export const authReducer = (state: DataType = initialState, action: ActionsTypes
     }
 }
 
-export const setAuthUserData = (data: DataType) => {
+export const initializedSuccess = (data: DataType) => {
     return {
         type: 'SET_USER_DATA',
         data
@@ -42,10 +44,14 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 }
 
 export const login = (email, password, rememberMe) => (dispatch: Dispatch) => {
+
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Something wrong'
+                dispatch(stopSubmit('login', {_error: message}))
             }
         })
 }
