@@ -88,7 +88,8 @@ export const rootReducer = combineReducers({
     profilePage: profileReducer,
     users: usersReducer,
     auth: appReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

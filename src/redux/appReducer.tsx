@@ -27,15 +27,18 @@ export const appReducer = (state: DataType = initialState, action: ActionsTypes)
     }
 }
 
-export const initializedSuccess = (data: DataType) => {
-    return {
-        type: 'SET_USER_DATA',
-        data
-    } as const
+export const initializedSuccess = () => ({type: 'INITIALIZED_SUCCESS'});
+
+export const initializeApp = () => (dispatch) => {
+    let promise = dispatch(getAuthUserData())
+    Promise.all([promise])
+        .then(() => {
+            dispatch(initializedSuccess())
+        })
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(response.data.data.login, isAuth: true))

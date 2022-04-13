@@ -7,12 +7,19 @@ import {
     InitialStateType,
     setCurrentPage,
     unfollow,
-    UsersType, toggleFollowingProgress, getUsers, setUsers, setTotalUsersCount, toggleIsFetching,
+    UsersType, toggleFollowingProgress, requestUsers, setUsers, setTotalUsersCount, toggleIsFetching,
 } from "../../redux/usersReducer"
 import Preloader from "../Common/Preloader";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
-import Dialogs from "../Dialogs/Dialogs";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/usersSelectors";
 
 
 export type UsersPropsType = MdtpType & MstpType
@@ -69,15 +76,26 @@ type MstpType = {
     isFetching: boolean
     followingInProgress: Array<number>
 }
-const mapStateToProps = (state: AppStateType): MstpType => {
+// const mapStateToProps = (state: AppStateType): MstpType => {
+//     return {
+//         users: state.users.users,
+//         usersPage: state.users,
+//         pageSize: state.users.pageSize,
+//         totalUsersCount: state.users.totalUsersCount,
+//         currentPage: state.users.currentPage,
+//         isFetching: state.users.isFetching,
+//         followingInProgress: state.users.followingInProgress
+//     }
+// }
+
+let mapStateToProps = (state) => {
     return {
-        users: state.users.users,
-        usersPage: state.users,
-        pageSize: state.users.pageSize,
-        totalUsersCount: state.users.totalUsersCount,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        followingInProgress: state.users.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -86,7 +104,7 @@ export default compose<React.ComponentType>(connect<MstpType, MdtpType, {}, Root
         unfollow,
         setCurrentPage,
         toggleFollowingProgress,
-        getUsers,
+        getUsers: requestUsers,
         toggleIsFetching,
         setUsers,
         setTotalUsersCount,
