@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import {addPostAC, profileReducer, getUserProfile, UpdateNewPostTextAC} from "./profileReducer";
 import {dialogsReducer, SendMessageBodyAC, UpdateNewMessageBodyAC} from "./dialogsReducer";
 import {follow, setUsers, unfollow, usersReducer} from "./usersReducer";
-import {appReducer} from "./appReducer";
+import {authReducer} from "./authReducer";
 import { reducer as formReducer } from 'redux-form';
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC>
@@ -87,9 +87,9 @@ export const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     profilePage: profileReducer,
     users: usersReducer,
-    auth: appReducer,
+    auth: authReducer,
     form: formReducer,
-    app: appReducer
+    app: authReducer
 })
 
 export type RootStateType = ReturnType<typeof rootReducer>

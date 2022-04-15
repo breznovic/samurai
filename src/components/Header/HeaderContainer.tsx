@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {logout} from "../../redux/appReducer";
+import {logout} from "../../redux/authReducer";
 
 type AuthType = {
     getAuthUserData: () => void

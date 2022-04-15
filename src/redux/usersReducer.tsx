@@ -1,5 +1,6 @@
 import {usersAPI} from "../API/API";
 import {Dispatch} from "redux";
+import {updateObjectInArray} from "../utils/objectHelpers";
 // import {ActionsTypes} from "./reduxStore";
 
 type LocationType = {
@@ -46,41 +47,35 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
         case 'FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.usersId) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: true})
             }
         case 'UNFOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.usersId) {
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
+                users: updateObjectInArray(state.users, action.userId, "id", {followed: false})
             }
-        case 'SET_USERS':
+        case 'SET_USERS': {
             return {...state, users: action.users}
-
-        case 'SET_CURRENT_PAGE':
+        }
+        case 'SET_CURRENT_PAGE': {
             return {...state, currentPage: action.currentPage}
-
-        case 'SET_TOTAL_USERS_COUNT':
-            return {...state, totalUsersCount: action.totalCount}
-        case 'TOGGLE_IS_FETCHING':
+        }
+        case 'SET_TOTAL_USERS_COUNT': {
+            return {...state, totalUsersCount: action.count}
+        }
+        case 'TOGGLE_IS_FETCHING': {
             return {...state, isFetching: action.isFetching}
-        case 'TOGGLE_IS_FOLLOWING_PROGRESS':
+        }
+        case 'TOGGLE_IS_FOLLOWING_PROGRESS': {
             return {
                 ...state,
-                followingInProgress: action.followingInProgress ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id !== action.userId)
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
             }
+        }
         default:
-            return state
+            return state;
     }
 }
 

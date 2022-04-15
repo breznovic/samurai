@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {Input} from "../Common/FormControl/FormControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
-import {login} from "../../redux/appReducer";
+import {login} from "../../redux/authReducer";
 import {Redirect} from "react-router-dom";
 import classes from '../Common/FormControl/FormControl.module.css'
 
