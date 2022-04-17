@@ -1,8 +1,8 @@
-import { ProfilePageType, ProfilePropsType} from "./reduxStore";
+import {ProfilePageType, ProfilePropsType} from "./reduxStore";
 import {profileAPI, usersAPI} from "../API/API";
 import {Dispatch} from "redux";
 
-let initialState:ProfilePageType= {
+let initialState: ProfilePageType = {
     posts: [
         {id: 1, posted: 'This is TypeScript', likes: 10},
         {id: 2, posted: 'TypeScript', likes: 5},
@@ -18,8 +18,8 @@ type ActionType =
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatusAC>
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionType):ProfilePageType=> {
-    switch(action.type) {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
+    switch (action.type) {
         case 'ADD_POST':
             let newPost = {
                 "id": 4,
@@ -35,51 +35,70 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'SET_STATUS': {
             return {...state, status: action.status}
         }
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter(p => p.id != action.postId)}
+        }
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state, profile: {...state.profile, photos: action.photos}}
+        }
         default:
             return state
     }
-}
 
-export const addPostAC = (newPostText: string) => {
-    return {
-        type: 'ADD_POST',
-        newPostText
-    } as const
-}
 
-export const setUserProfile = (profile: ProfilePropsType ) => {
-    return {
-        type: 'SET_USER_PROFILE',
-        profile
-    } as const
-}
+    export const addPostAC = (newPostText: string) => {
+        return {
+            type: 'ADD_POST',
+            newPostText
+        } as const
+    }
 
-export const setStatusAC = (status: string ) => {
-    return {
-        type: 'SET_STATUS',
-        status
-    } as const
-}
+    export const setUserProfile = (profile: ProfilePropsType) => {
+        return {
+            type: 'SET_USER_PROFILE',
+            profile
+        } as const
+    }
 
-export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data))
-        })
-}
+    export const setStatusAC = (status: string) => {
+        return {
+            type: 'SET_STATUS',
+            status
+        } as const
+    }
 
-export const getStatus = (userId: number) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatusAC(response.data))
-        })
-}
+    export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+        usersAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
+    export const getStatus = (userId: number) => (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatusAC(response.data))
+            })
+    }
+
+    export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatusAC(status))
+                }
+            })
+
+        export const deletePost = (postId) => ({type: DELETE_POST, postId})
+        export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
+
+        export const savePhoto = (file) => async (dispatch) => {
+            let response = await profileAPI.savePhoto(file);
+
             if (response.data.resultCode === 0) {
-                dispatch(setStatusAC(status))
+                dispatch(savePhotoSuccess(response.data.data.photos));
             }
-        })
+        }
+    }
+
 }
